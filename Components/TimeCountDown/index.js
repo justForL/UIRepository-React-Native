@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 import { View,Text,TouchableOpacity,StyleSheet } from 'react-native';
+import {PropTypes} from 'prop-types'
 
 export default class TimeCountDown extends Component {
 
     static defaultProps = {
-        timeOut:0
+        timeOut:0,
+        onPress: PropTypes.func,
     }
     timer = null;
     state = { isTap: false }
@@ -19,6 +21,7 @@ export default class TimeCountDown extends Component {
         if (!this.state.isTap) {
             this._changeCurrentTapState();
             this._countDown();
+            this.props.onPress();
         }
     }
 

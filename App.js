@@ -27,6 +27,10 @@ export default class App extends Component {
         <Text style={styles.instructions}>{instructions}</Text>
         <TimeCountDown 
         timeOut={5}
+        onPress={()=>{
+          console.warn("onPress");
+          
+        }}
         />
         <LJAlert
           title={"语音验证码"}

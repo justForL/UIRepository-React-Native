@@ -54,3 +54,4 @@ export default class App extends Component<Props> {
 | 属性  | 描述 |
 |----|----:|
 | timeOut  | 倒计时时间 |
+| onPress  | 点击倒计时回调 |

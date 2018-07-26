@@ -9,6 +9,7 @@
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
 import LJAlert from './Components/LJAlert'
+import TimeCountDown from './Components/TimeCountDown'
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
   android:
@@ -16,14 +17,17 @@ const instructions = Platform.select({
     'Shake or press menu button for dev menu',
 });
 
-type Props = {};
-export default class App extends Component<Props> {
+
+export default class App extends Component {
   render() {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>Welcome to React Native!</Text>
         <Text style={styles.instructions}>To get started, edit App.js</Text>
         <Text style={styles.instructions}>{instructions}</Text>
+        <TimeCountDown 
+        timeOut={5}
+        />
         <LJAlert
           title={"语音验证码"}
           content={"我们将会给138****3212手机拨打语音，请 注意接听来电"}
@@ -42,7 +46,6 @@ export default class App extends Component<Props> {
     );
   }
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,

@@ -42,13 +42,13 @@ export default class LJAlert extends Component {
         if(show) this._animateShowAction(true);
     }
 
-    changeShowState(show: Boolean) {
+    changeShowState(show) {
         this.setState({
             showSelf:show
         })
     }
 
-    _animateShowAction(show: Boolean) {
+    _animateShowAction(show) {
         
         Animated.spring(
             this.springValue,
@@ -63,7 +63,7 @@ export default class LJAlert extends Component {
             this.changeShowState(show);
           });
     }
-    _animateHideAction(show:Boolean) {  
+    _animateHideAction(show) {  
         Animated.spring(
             this.springValue,
             {

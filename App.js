@@ -10,6 +10,7 @@ import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
 import LJAlert from './Components/LJAlert'
 import TimeCountDown from './Components/TimeCountDown'
+import AlertManager from './Components/LJAlert'
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
   android:
@@ -19,6 +20,26 @@ const instructions = Platform.select({
 
 
 export default class App extends Component {
+
+  _confirmBtnOnpress(){
+    console.warn("确认按钮点击");
+    AlertManager.hide();
+  }
+  _closeBtnOnpress(){
+    console.warn("关闭按钮点击");
+    AlertManager.hide();
+  }
+  _timeCountDownPress = () =>{
+    AlertManager.show("语音验证码","simple",{
+      show:true,
+      content:"我们将会给138****3212手机拨打语音请注意接听来电",
+      sureBtnTitle:"我知道了",
+      btnTitles:["取消","放弃修改"],
+      confirmBtnOnpress:this._confirmBtnOnpress,
+      closeBtnOnpress:this._closeBtnOnpress
+    })
+    
+  }
   render() {
     return (
       <View style={styles.container}>
@@ -27,25 +48,8 @@ export default class App extends Component {
         <Text style={styles.instructions}>{instructions}</Text>
         <TimeCountDown 
         timeOut={5}
-        onPress={()=>{
-          console.warn("onPress");
-          
-        }}
+        onPress={this._timeCountDownPress.bind(this)}
         />
-        <LJAlert
-          title={"语音验证码"}
-          content={"我们将会给138****3212手机拨打语音，请 注意接听来电"}
-          sureBtnTitle={"我知道了"}
-          show={true}
-          type={"confirm"}
-          btnTitles={["取消","放弃修改"]}
-          confirmBtnOnpress={()=>{
-            console.warn("确认按钮点击");
-            
-          }} 
-          closeBtnOnpress={()=>{
-            console.warn("关闭按钮点击");
-          }}/>
       </View>
     );
   }

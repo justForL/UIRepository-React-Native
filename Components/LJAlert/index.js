@@ -1,12 +1,57 @@
 import React, { Component } from 'react';
 import { View,Image,Text,BackAndroid,BackHandler,Animated,StyleSheet,Dimensions,TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types'
+
+import RootSiblings from "react-native-root-siblings"
 const {width,height} = Dimensions.get('window');
 const LJAlertBackViewWidth = width - 30;
 const LJBackHandler = BackHandler || BackAndroid;
 const LJ_BACK_EVENT = 'hardwareBackPress';
+let _INSTANCE = null;
 
-export default class LJAlert extends Component {
+export default class AlertManager extends React.Component{
+    siblings = null;
+    constructor(){                
+        if (!_INSTANCE) {
+            _INSTANCE = super();
+        }
+        return _INSTANCE;
+      }
+
+    static ShareInstance(){
+        let singleton = new AlertManager();
+        return singleton;
+    }
+    
+    static show(title,type,option={}){
+        AlertManager.ShareInstance()
+        .show(title,type,option);
+    }
+    
+
+    static hide(){      
+        AlertManager.ShareInstance()
+        .hide();
+    }
+
+
+    show(title,type,option={}){
+        _INSTANCE.siblings = new RootSiblings(
+            <LJAlert title={title}
+            type={type}
+            {...option}/>
+        )
+    }
+    hide(){
+        console.warn(_INSTANCE);
+        
+        _INSTANCE.siblings && _INSTANCE.siblings.destroy();
+    }
+    render(){
+        return null;
+    }
+}
+class LJAlert extends Component {
     
     
     /**

@@ -29,6 +29,8 @@ export default class App extends Component<Props> {
           content={"我们将会给138****3212手机拨打语音，请 注意接听来电"}
           sureBtnTitle={"我知道了"}
           show={true}
+          type={"confirm"}
+          btnTitles={["取消","放弃修改"]}
           confirmBtnOnpress={()=>{
             console.warn("确认按钮点击");
             
